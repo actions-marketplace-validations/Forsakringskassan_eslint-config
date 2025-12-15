@@ -1,6 +1,6 @@
 {
   "name": "@forsakringskassan/eslint-config-typescript-typeinfo",
-  "version": "13.2.1",
+  "version": "13.2.5",
   "description": "Försäkringskassans eslint shareable typescript config with typeinfo",
   "keywords": [
     "eslint"
@@ -20,9 +20,9 @@
     "index.d.mts"
   ],
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "8.47.0",
-    "@typescript-eslint/parser": "8.47.0",
-    "typescript-eslint": "8.47.0"
+    "@typescript-eslint/eslint-plugin": "8.49.0",
+    "@typescript-eslint/parser": "8.49.0",
+    "typescript-eslint": "8.49.0"
   },
   "peerDependencies": {
     "eslint": "^9.0.0",

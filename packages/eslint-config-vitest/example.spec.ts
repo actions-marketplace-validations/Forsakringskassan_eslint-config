@@ -34,7 +34,7 @@ describe("should use describe and it", () => {
         expect.assertions(1);
         expect(() => {
             myFunction("invalid");
-        }).toThrow("Invalid value");
+        }).toThrowError("Invalid value");
     });
 
     it("should use await for async tests", async () => {

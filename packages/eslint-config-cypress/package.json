@@ -1,6 +1,6 @@
 {
   "name": "@forsakringskassan/eslint-config-cypress",
-  "version": "13.2.2",
+  "version": "13.2.5",
   "description": "Försäkringskassans eslint shareable cypress config",
   "keywords": [
     "eslint"
@@ -24,7 +24,7 @@
     "eslint-plugin-mocha": "11.2.0"
   },
   "devDependencies": {
-    "cypress": "15.7.0"
+    "cypress": "15.7.1"
   },
   "peerDependencies": {
     "eslint": "^9.0.0"

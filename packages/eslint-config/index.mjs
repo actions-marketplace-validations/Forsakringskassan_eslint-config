@@ -295,7 +295,8 @@ export default [
         name: "@forsakringskassan/eslint-config/esm",
         files: ["**/*.mjs"],
         rules: {
-            "import/extensions": ["error", "always"],
+            /* Could be removed once https://github.com/import-js/eslint-plugin-import/issues/3189 is fixed */
+            "import/extensions": ["error", "always", { ignorePackages: true }],
         },
     }),
 

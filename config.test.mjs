@@ -17,11 +17,25 @@ import vueConfig from "./packages/eslint-config-vue/index.mjs";
 const browserGlobals = new Set(Object.keys(globals.browser));
 const nodeGlobals = new Set(Object.keys(globals.node));
 
+function needSorting(parent) {
+    return ["rules", "globals"].includes(parent);
+}
+
+function cmp([a], [b]) {
+    if (a < b) {
+        return -1;
+    }
+    if (a > b) {
+        return 1;
+    }
+    return 0;
+}
+
 /**
  * @param {unknown} value
  * @returns {unknown}
  */
-function serialize(value) {
+function serialize(value, parent) {
     if (typeof value === "function") {
         return `[Function ${value.name}]`;
     }
@@ -66,9 +80,10 @@ function serialize(value) {
                 ];
                 return [key, values];
             }
-            return [key.replace(/\\/g, "/"), serialize(it)];
+            return [key.replace(/\\/g, "/"), serialize(it, key)];
         });
-        return Object.fromEntries(mapped);
+        const sorted = needSorting(parent) ? mapped.toSorted(cmp) : mapped;
+        return Object.fromEntries(sorted);
     }
     return value;
 }
