@@ -1,6 +1,6 @@
 {
   "name": "@forsakringskassan/eslint-config-monorepo",
-  "version": "13.2.5",
+  "version": "13.2.6",
   "private": true,
   "description": "Försäkringskassans eslint shareable config",
   "homepage": "https://github.com/Forsakringskassan/eslint-config",
@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@forsakringskassan/commitlint-config": "3.3.1",
-    "@forsakringskassan/prettier-config-svelte": "3.3.1",
+    "@forsakringskassan/prettier-config-svelte": "3.3.2",
     "@tsconfig/node22": "22.0.5",
     "@tsconfig/strictest": "2.0.8",
     "@types/jest": "30.0.0",
