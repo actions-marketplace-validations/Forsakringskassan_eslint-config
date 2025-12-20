@@ -38,7 +38,7 @@
     "@tsconfig/strictest": "2.0.8",
     "@types/jest": "30.0.0",
     "@types/node": "22.19.3",
-    "cypress": "15.7.1",
+    "cypress": "15.8.0",
     "eslint": "9.39.2",
     "globals": "16.5.0",
     "jest": "30.2.0",
