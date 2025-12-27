@@ -156,6 +156,7 @@ exports[`Extension .cy.ts 1`] = `
       }
     ],
     "@typescript-eslint/no-useless-constructor": "error",
+    "@typescript-eslint/no-useless-default-assignment": "error",
     "@typescript-eslint/no-wrapper-object-types": "error",
     "@typescript-eslint/non-nullable-type-assertion-style": "error",
     "@typescript-eslint/object-curly-spacing": "off",
@@ -1592,6 +1593,7 @@ exports[`Extension .spec.ts (jest) 1`] = `
       }
     ],
     "@typescript-eslint/no-useless-constructor": "error",
+    "@typescript-eslint/no-useless-default-assignment": "error",
     "@typescript-eslint/no-wrapper-object-types": "error",
     "@typescript-eslint/non-nullable-type-assertion-style": "error",
     "@typescript-eslint/object-curly-spacing": "off",
@@ -2430,6 +2432,7 @@ exports[`Extension .spec.ts (vitest) 1`] = `
       }
     ],
     "@typescript-eslint/no-useless-constructor": "error",
+    "@typescript-eslint/no-useless-default-assignment": "error",
     "@typescript-eslint/no-wrapper-object-types": "error",
     "@typescript-eslint/non-nullable-type-assertion-style": "error",
     "@typescript-eslint/object-curly-spacing": "off",
@@ -3015,6 +3018,7 @@ exports[`Extension .spec.ts (vitest) 1`] = `
     "vitest/no-standalone-expect": "error",
     "vitest/no-test-prefixes": "warn",
     "vitest/no-test-return-statement": "error",
+    "vitest/no-unneeded-async-expect-function": "error",
     "vitest/padding-around-after-all-blocks": "warn",
     "vitest/padding-around-after-each-blocks": "warn",
     "vitest/padding-around-before-all-blocks": "warn",
@@ -3947,6 +3951,7 @@ exports[`Extension .ts 1`] = `
       }
     ],
     "@typescript-eslint/no-useless-constructor": "error",
+    "@typescript-eslint/no-useless-default-assignment": "error",
     "@typescript-eslint/no-wrapper-object-types": "error",
     "@typescript-eslint/non-nullable-type-assertion-style": "error",
     "@typescript-eslint/object-curly-spacing": "off",
@@ -6734,6 +6739,7 @@ exports[`Package @forsakringskassan/eslint-config-typescript-typeinfo 1`] = `
     "@typescript-eslint/no-unsafe-member-access": "off",
     "@typescript-eslint/no-unsafe-return": "error",
     "@typescript-eslint/no-unsafe-unary-minus": "error",
+    "@typescript-eslint/no-useless-default-assignment": "error",
     "@typescript-eslint/non-nullable-type-assertion-style": "error",
     "@typescript-eslint/only-throw-error": "error",
     "@typescript-eslint/prefer-find": "error",
@@ -6860,6 +6866,7 @@ exports[`Package @forsakringskassan/eslint-config-vitest 1`] = `
     "vitest/no-standalone-expect": "error",
     "vitest/no-test-prefixes": "warn",
     "vitest/no-test-return-statement": "error",
+    "vitest/no-unneeded-async-expect-function": "error",
     "vitest/padding-around-after-all-blocks": "warn",
     "vitest/padding-around-after-each-blocks": "warn",
     "vitest/padding-around-before-all-blocks": "warn",
