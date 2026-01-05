@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 13.2.8 (2026-01-02)
+
+### Bug Fixes
+
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.3 7cf2b92
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.4 3bb45c0
+* **deps:** update dependency eslint-plugin-jest to v29.10.1 ef16cfe
+* **deps:** update dependency eslint-plugin-jest to v29.11.0 cc6a62d
+* **deps:** update dependency eslint-plugin-jest to v29.11.1 98d6e6d
+* **deps:** update typescript-eslint monorepo to v8.50.1 797150e
+* **deps:** update typescript-eslint monorepo to v8.51.0 63774fb
+
 ## 13.2.7 (2025-12-26)
 
 ### Bug Fixes
