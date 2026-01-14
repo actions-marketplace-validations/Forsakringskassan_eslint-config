@@ -76,6 +76,9 @@ const config = defineConfig({
 
         "@typescript-eslint/no-object-literal-type-assertion": ["off"],
 
+        /* common pattern for props destructuring is to explicitly assign "undefined", which clashes with this rule */
+        "@typescript-eslint/no-useless-default-assignment": "off",
+
         "sonarjs/different-types-comparison": "off", // does not play well with vue
 
         /* documentation for vue components does not adhere with tsdoc syntax */

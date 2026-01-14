@@ -166,6 +166,7 @@ export default [
             "sonarjs/no-empty-test-file": "off", // could be useful but it does not handle it.each or similar constructs thus yields more false positives than its worth */
             "sonarjs/no-selector-parameter": "off", // not always possible (e.g. watcher handler in vue)
             "sonarjs/no-skipped-tests": "off", // covered by jest/no-disabled-tests and mocha/no-pending-tests
+            "sonarjs/no-exclusive-tests": "off", // covered by jest/no-focused-tests and mocha/no-exclusive-tests
             "sonarjs/no-small-switch": "off", // prefer to use small switches when the intention is to all more cases later
             "sonarjs/no-unused-vars": "off", // covered by @typescript-eslint/no-unused-vars
             "sonarjs/prefer-nullish-coalescing": "off", // requires typescript and strictNullChecks, which is sane, but we also use @typescript-eslint/prefer-nullish-coalescing so this becomes redundant

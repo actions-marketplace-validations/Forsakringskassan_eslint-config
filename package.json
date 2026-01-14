@@ -1,6 +1,6 @@
 {
   "name": "@forsakringskassan/eslint-config-monorepo",
-  "version": "13.2.9",
+  "version": "13.2.10",
   "private": true,
   "description": "Försäkringskassans eslint shareable config",
   "homepage": "https://github.com/Forsakringskassan/eslint-config",
@@ -37,7 +37,7 @@
     "@tsconfig/node22": "22.0.5",
     "@tsconfig/strictest": "2.0.8",
     "@types/jest": "30.0.0",
-    "@types/node": "22.19.3",
+    "@types/node": "22.19.5",
     "cypress": "15.8.2",
     "eslint": "9.39.2",
     "globals": "16.5.0",

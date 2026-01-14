@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 13.2.10 (2026-01-14)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config-vue:** disable `@typescript-eslint/no-useless-default-assignment` for `*.vue` 467653f
+* **@forsakringskassan/eslint-config:** disable `sonarjs/no-exclusive-tests` (already covered by other rules) acd6785
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.6 be4bc08
+* **deps:** update dependency eslint-plugin-cypress to v5.2.1 a340f16
+* **deps:** update dependency eslint-plugin-svelte to v3.14.0 7f1519e
+
 ## 13.2.9 (2026-01-09)
 
 ### Bug Fixes
