@@ -1,6 +1,6 @@
 {
   "name": "@forsakringskassan/eslint-config-angular",
-  "version": "13.2.0",
+  "version": "13.3.0",
   "description": "Försäkringskassans eslint shareable angular config",
   "keywords": [
     "eslint"
@@ -22,7 +22,7 @@
   "dependencies": {
     "eslint-config-angular": "0.5.0",
     "eslint-plugin-angular": "5.0.0",
-    "globals": "16.5.0"
+    "globals": "17.2.0"
   },
   "peerDependencies": {
     "eslint": "^9.0.0"

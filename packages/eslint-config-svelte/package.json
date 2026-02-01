@@ -1,6 +1,6 @@
 {
   "name": "@forsakringskassan/eslint-config-svelte",
-  "version": "13.2.11",
+  "version": "13.3.0",
   "description": "Försäkringskassans eslint shareable svelte config",
   "keywords": [
     "eslint"
@@ -23,16 +23,16 @@
     "test": "tsc --noEmit"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "8.53.0",
-    "@typescript-eslint/parser": "8.53.0",
+    "@typescript-eslint/eslint-plugin": "8.54.0",
+    "@typescript-eslint/parser": "8.54.0",
     "eslint-plugin-svelte": "3.14.0",
-    "globals": "16.5.0",
+    "globals": "17.2.0",
     "svelte-eslint-parser": "1.4.1",
-    "typescript-eslint": "8.53.0"
+    "typescript-eslint": "8.54.0"
   },
   "devDependencies": {
     "@tsconfig/svelte": "5.0.6",
-    "svelte": "5.46.4",
+    "svelte": "5.48.5",
     "typescript": "5.9.3"
   },
   "peerDependencies": {

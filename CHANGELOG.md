@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## 13.3.0 (2026-01-30)
+
+### Features
+
+* **deps:** update dependency globals to v17 187c8c4
+
+### Bug Fixes
+
+* **deps:** update dependency globals to v17.1.0 184ebda
+* **deps:** update typescript-eslint monorepo to v8.53.1 9060e88
+* **deps:** update typescript-eslint monorepo to v8.54.0 f998967
+
+## 13.2.12 (2026-01-23)
+
+### Bug Fixes
+
+* **deps:** update dependency @eslint-community/eslint-plugin-eslint-comments to v4.6.0 7875d85
+* **deps:** update dependency eslint-plugin-prettier to v5.5.5 99eef55
+* **deps:** update dependency eslint-plugin-vue to v10.7.0 6f910c0
+
 ## 13.2.11 (2026-01-16)
 
 ### Bug Fixes
