@@ -32,7 +32,7 @@ function merge(result, it) {
 
 const recommended = sveltePlugin.configs["recommended"].reduce(merge, {});
 
-const config = defineConfig({
+const defaultConfig = defineConfig({
     name: "@forsakringskassan/eslint-config-svelte",
     files: ["**/*.svelte", "**/*.svelte.[jt]s"],
 
@@ -62,4 +62,5 @@ const config = defineConfig({
  * @param {Config} [override]
  * @returns {Config}
  */
-export default (override) => merge(config, override ?? {});
+const config = (override) => merge(defaultConfig, override ?? {});
+export default config;

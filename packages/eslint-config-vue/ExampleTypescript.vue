@@ -42,9 +42,9 @@ class Foo extends Component implements FooInterface {
         return `Hello, ${to} from ${joined}! ${meaning}`;
     }
 
-    public static async myStaticFunction(): Promise<void> {
-        function nestedFunction<T>(a: T, b: T): T {
-            return add(a, b);
+    public static async myStaticFunction(c: number): Promise<void> {
+        function nestedFunction<T extends number>(a: T, b: T): number {
+            return add(a, b, c);
         }
 
         let x = nestedFunction(1, 2);

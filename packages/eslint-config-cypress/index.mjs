@@ -31,7 +31,7 @@ function merge(result, it) {
 const globals = cypressPlugin.configs.globals;
 const recommended = cypressPlugin.configs.recommended;
 
-const config = defineConfig({
+const defaultConfig = defineConfig({
     name: "@forsakringskassan/eslint-config-cypress",
     files: ["**/*.cy.[jt]s", "cypress/support/**/*.[jt]s"],
 
@@ -56,6 +56,17 @@ const config = defineConfig({
         "mocha/no-exclusive-tests": "warn",
         "mocha/no-identical-title": "error",
         "mocha/no-pending-tests": "warn",
+
+        /* allow either kebab-case or PascalCase for testcases, it should match the file under test */
+        "unicorn/filename-case": [
+            "error",
+            {
+                cases: {
+                    kebabCase: true,
+                    pascalCase: true,
+                },
+            },
+        ],
     },
 });
 
@@ -63,4 +74,5 @@ const config = defineConfig({
  * @param {Config} [override]
  * @returns {Config}
  */
-export default (override) => merge(config, override ?? {});
+const config = (override) => merge(defaultConfig, override ?? {});
+export default config;

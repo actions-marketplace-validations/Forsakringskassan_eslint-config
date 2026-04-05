@@ -1,7 +1,7 @@
 /**
  * This is a sample file
  */
-import "fs";
+import "node:fs";
 import "node:path";
 import "eslint";
 import { Component } from "@/components";
@@ -26,9 +26,9 @@ export class Foo extends Component {
         return `Hello, ${to} from ${from.join(",")}`;
     }
 
-    static myStaticFunction() {
-        function nestedFunction(n) {
-            return add(n, this.value);
+    static myStaticFunction(a) {
+        function nestedFunction(b) {
+            return add(a, b, this.value);
         }
 
         let x = nestedFunction(1);
@@ -83,7 +83,7 @@ export function anyComplexCondition(a, b, c) {
  * @returns {Promise<void>}
  */
 export async function asyncFunction() {
-    return Promise.resolve();
+    await Promise.resolve();
 }
 
 await asyncFunction();

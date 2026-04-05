@@ -27,7 +27,7 @@ function merge(result, it) {
     };
 }
 
-const config = defineConfig({
+const defaultConfig = defineConfig({
     name: "@forsakringskassan/eslint-config-cli",
     files: [
         "*.{js,ts,cjs,mjs}",
@@ -48,4 +48,5 @@ const config = defineConfig({
  * @param {Config} [override]
  * @returns {Config}
  */
-export default (override) => merge(config, override ?? {});
+const config = (override) => merge(defaultConfig, override ?? {});
+export default config;

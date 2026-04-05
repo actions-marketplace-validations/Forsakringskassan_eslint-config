@@ -29,9 +29,9 @@ function merge(result, it) {
 
 const { configs } = vitest;
 
-const config = defineConfig({
+const defaultConfig = defineConfig({
     name: "@forsakringskassan/eslint-config-vitest",
-    files: ["**/*.spec.[jt]s"],
+    files: ["**/*.spec.{js,ts,cjs,mjs,mts}"],
     ignores: ["cypress/**", "tests/e2e/**"],
 
     plugins: {
@@ -93,6 +93,19 @@ const config = defineConfig({
 
         /* jest uses @jest-* tags for per-file configuration */
         "tsdoc/syntax": "off",
+
+        "unicorn/consistent-function-scoping": "off",
+
+        /* allow either kebab-case or PascalCase for testcases, it should match the file under test */
+        "unicorn/filename-case": [
+            "error",
+            {
+                cases: {
+                    kebabCase: true,
+                    pascalCase: true,
+                },
+            },
+        ],
     },
 });
 
@@ -100,4 +113,5 @@ const config = defineConfig({
  * @param {Config} [override]
  * @returns {Config}
  */
-export default (override) => merge(config, override ?? {});
+const config = (override) => merge(defaultConfig, override ?? {});
+export default config;

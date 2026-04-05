@@ -1,6 +1,6 @@
 {
   "name": "@forsakringskassan/eslint-config-vitest",
-  "version": "13.3.0",
+  "version": "14.1.1",
   "description": "Försäkringskassans eslint shareable vitest config",
   "keywords": [
     "eslint",
@@ -21,15 +21,15 @@
     "index.d.mts"
   ],
   "dependencies": {
-    "@vitest/eslint-plugin": "1.6.6"
+    "@vitest/eslint-plugin": "1.6.14"
   },
   "devDependencies": {
-    "vitest": "4.0.18"
+    "vitest": "4.1.2"
   },
   "peerDependencies": {
     "eslint": "^9.0.0"
   },
   "engines": {
-    "node": ">= 22.0"
+    "node": ">= 22.13"
   }
 }

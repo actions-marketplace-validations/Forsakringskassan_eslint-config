@@ -1,5 +1,200 @@
 # CHANGELOG
 
+## 14.1.1 (2026-04-04)
+
+### Bug Fixes
+
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.14 a115f1d
+
+## 14.1.0 (2026-03-31)
+
+### Features
+
+* **deps:** update dependency eslint-plugin-unicorn to v64 84285a1
+
+## 14.0.11 (2026-03-30)
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.58.0 1438aca
+
+## 14.0.10 (2026-03-28)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-jest to v29.15.1 922f33c
+
+## 14.0.9 (2026-03-27)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-cypress to v6.2.1 3f244dc
+
+## 14.0.8 (2026-03-27)
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.57.2 6c6dc40
+
+## 14.0.7 (2026-03-26)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config-typescript-typeinfo, @forsakringskassan/eslint-config-typescript:** allow peer typescript 6 4a51db5
+
+## 14.0.6 (2026-03-25)
+
+### Bug Fixes
+
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.13 c552275
+
+## 14.0.5 (2026-03-24)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-svelte to v3.16.0 6706299
+
+## 14.0.4 (2026-03-21)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config-vue, @forsakringskassan/eslint-config:** pageobjects and selectors shoudl be PascalCase 01fe5f3
+
+## 14.0.3 (2026-03-20)
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.57.1 4d729be
+
+## 14.0.2 (2026-03-17)
+
+### Bug Fixes
+
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.12 35d22e9
+
+## 14.0.1 (2026-03-17)
+
+### Bug Fixes
+
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.10 9110e51
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.11 277e353
+* **deps:** update dependency eslint-plugin-cypress to v6.2.0 0ad8359
+* **deps:** update dependency eslint-plugin-sonarjs to v4.0.2 a628586
+* **deps:** update dependency eslint-plugin-svelte to v3.15.2 c606c46
+* **deps:** update typescript-eslint monorepo to v8.57.0 1a64fcc
+
+## 14.0.0 (2026-03-13)
+
+### ⚠ BREAKING CHANGES
+
+* remove Angular config as we no longer build any Angular applications.
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-sonarjs to v4.0.1 ac2239e
+* **deps:** update dependency svelte-eslint-parser to v1.6.0 fdffbe1
+* **deps:** update eslint monorepo to v9.39.4 aa5ab4e
+
+### Code Refactoring
+
+* drop Angular config (refs SB-4982) 1ba5a5f
+
+## 13.5.3 (2026-03-07)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config-cypress, @forsakringskassan/eslint-config-jest, @forsakringskassan/eslint-config-vitest:** allow testcases to be in either kebab-case (default) or PascalCase (vue) d6be0f6
+
+## 13.5.2 (2026-03-06)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config:** handle apimock-express mocks filename case 2135073
+
+## 13.5.1 (2026-03-06)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config-vue:** handle vite-lib-config app.vue default entrypoint f31d43f
+
+## 13.5.0 (2026-03-06)
+
+### Features
+
+* **@forsakringskassan/eslint-config-angular, @forsakringskassan/eslint-config-cli, @forsakringskassan/eslint-config-cypress, @forsakringskassan/eslint-config-jest, @forsakringskassan/eslint-config-svelte, @forsakringskassan/eslint-config-typescript-typeinfo, @forsakringskassan/eslint-config-typescript, @forsakringskassan/eslint-config-vitest, @forsakringskassan/eslint-config-vue, @forsakringskassan/eslint-config:** enable eslint-plugin-unicorn 442e569
+
+## 13.4.2 (2026-03-06)
+
+### Bug Fixes
+
+* **deps:** update dependency @eslint-community/eslint-plugin-eslint-comments to v4.7.0 abb9364
+* **deps:** update dependency @eslint-community/eslint-plugin-eslint-comments to v4.7.1 30e440a
+* **deps:** update dependency eslint-plugin-tsdoc to v0.5.1 8627ab1
+* **deps:** update dependency eslint-plugin-tsdoc to v0.5.2 eca9a56
+* **deps:** update dependency globals to v17.4.0 6a45ef6
+* **deps:** update dependency svelte-eslint-parser to v1.5.1 10f5e99
+
+## 13.4.1 (2026-02-27)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config-typescript:** disable `sonarjs/no-dead-store` for typescript (covered by other rules) 9b59578
+* **deps:** update dependency eslint-plugin-cypress to v6.1.0 a51c77f
+* **deps:** update eslint monorepo to v9.39.3 c3877ed
+* **deps:** update typescript-eslint monorepo to v8.56.1 87dd2c2
+
+## 13.4.0 (2026-02-21)
+
+### Features
+
+* **deps:** update dependency eslint-plugin-cypress to v6 0be342d
+* **deps:** update dependency eslint-plugin-sonarjs to v4 645f15f
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-jest to v29.15.0 87b0c21
+* **deps:** update typescript-eslint monorepo to v8.56.0 08e5402
+
+## 13.3.5 (2026-02-20)
+
+### Bug Fixes
+
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.7 86610d8
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.9 2ce71fa
+* **deps:** update dependency eslint-plugin-jest to v29.14.0 b86d068
+* **deps:** update dependency eslint-plugin-sonarjs to v3.0.7 320f7ef
+* **deps:** update dependency eslint-plugin-svelte to v3.15.0 a5a63b9
+* **deps:** update dependency eslint-plugin-vue to v10.8.0 a7d8a00
+* **deps:** update typescript-eslint monorepo to v8.55.0 7b28099
+
+## 13.3.4 (2026-02-13)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-cypress to v5.3.0 322f0f5
+* **deps:** update dependency eslint-plugin-jest to v29.12.2 14f32d3
+* **deps:** update dependency eslint-plugin-jest to v29.13.0 8a4a75a
+
+## 13.3.3 (2026-02-06)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config-jest, @forsakringskassan/eslint-config-vitest:** lint mjs and mts for Vitest and Jest 39775b5
+
+## 13.3.2 (2026-02-06)
+
+### Bug Fixes
+
+* **deps:** update dependency globals to v17.3.0 355dcc6
+
+## 13.3.1 (2026-02-03)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config-vue:** disable `@typescript-eslint/no-unsafe` rules for Vue 07366c9
+* **deps:** update dependency eslint-plugin-sonarjs to v3.0.6 eb300fd
+* **deps:** update dependency globals to v17.2.0 720cab7
+
 ## 13.3.0 (2026-01-30)
 
 ### Features

@@ -35,7 +35,7 @@ function merge(result, it) {
 const strict = tseConfig.strict.reduce(merge, {});
 const stylistic = tseConfig.stylistic.reduce(merge, {});
 
-const config = defineConfig({
+const defaultConfig = defineConfig({
     name: "@forsakringskassan/eslint-config-typescript",
     files: ["**/*.{ts,cts,mts,vue}"],
 
@@ -120,6 +120,24 @@ const config = defineConfig({
         ],
 
         "tsdoc/syntax": "error",
+
+        /* covered by @typescript-eslint/no-unused-vars */
+        "sonarjs/no-dead-store": "off",
+
+        /* disable unicorn rules covered by typescript or @typescript-eslint */
+        "unicorn/no-new-array":
+            "off" /* @typescript-eslint/no-array-constructor */,
+        "unicorn/no-new-buffer": "off" /* @typescript-eslint/no-deprecated */,
+        "unicorn/no-this-assignment":
+            "off" /* @typescript-eslint/no-this-alias */,
+        "unicorn/no-unnecessary-await":
+            "off" /* @typescript-eslint/await-thenable */,
+        "unicorn/prefer-includes":
+            "off" /* @typescript-eslint/prefer-includes */,
+        "unicorn/prefer-keyboard-event-key":
+            "off" /* @typescript-eslint/no-deprecated */,
+        "unicorn/prefer-string-starts-ends-with":
+            "off" /* @typescript-eslint/prefer-string-starts-ends-with */,
     },
 });
 
@@ -127,4 +145,5 @@ const config = defineConfig({
  * @param {Config} [override]
  * @returns {Config}
  */
-export default (override) => merge(config, override ?? {});
+const config = (override) => merge(defaultConfig, override ?? {});
+export default config;

@@ -14,8 +14,16 @@ import vueConfig from "./packages/eslint-config-vue/index.mjs";
  * @typedef {import("eslint").Linter.Config} Config
  */
 
-const browserGlobals = new Set(Object.keys(globals.browser));
-const nodeGlobals = new Set(Object.keys(globals.node));
+const subsets = [
+    { name: "globals.node", set: new Set(Object.keys(globals.node)) },
+    { name: "globals.browser", set: new Set(Object.keys(globals.browser)) },
+    { name: "globals.es2023", set: new Set(Object.keys(globals.es2023)) },
+    { name: "globals.mocha", set: new Set(Object.keys(globals.mocha)) },
+    { name: "globals.chai", set: new Set(Object.keys(globals.chai)) },
+    { name: "globals.jest", set: new Set(Object.keys(globals.jest)) },
+    { name: "globals.jasmine", set: new Set(Object.keys(globals.jasmine)) },
+    { name: "globals.vitest", set: new Set(Object.keys(globals.vitest)) },
+];
 
 function needSorting(parent) {
     return ["rules", "globals"].includes(parent);
@@ -64,23 +72,20 @@ function serialize(value, parent) {
             }
             if (key === "globals") {
                 const set = new Set(Object.keys(value.globals));
+                const complete = subsets.filter(({ set: globalSet }) =>
+                    globalSet.isSubsetOf(set),
+                );
                 let remainder = new Set(set);
-                const subsets = [];
-                if (nodeGlobals.isSubsetOf(set)) {
-                    subsets.push("globals.node");
-                    remainder = remainder.difference(nodeGlobals);
-                }
-                if (browserGlobals.isSubsetOf(set)) {
-                    subsets.push("globals.browser");
-                    remainder = remainder.difference(browserGlobals);
+                for (const { set: globalSet } of complete) {
+                    remainder = remainder.difference(globalSet);
                 }
                 const values = [
-                    ...subsets.map((it) => `...${it}`),
-                    ...Array.from(remainder, (it) => `"${it}`),
+                    ...complete.map(({ name }) => `...${name}`),
+                    ...Array.from(remainder, (it) => `${it}`),
                 ];
                 return [key, values];
             }
-            return [key.replace(/\\/g, "/"), serialize(it, key)];
+            return [key.replaceAll("\\", "/"), serialize(it, key)];
         });
         const sorted = needSorting(parent) ? mapped.toSorted(cmp) : mapped;
         return Object.fromEntries(sorted);
@@ -90,7 +95,6 @@ function serialize(value, parent) {
 
 const packages = [
     "@forsakringskassan/eslint-config",
-    "@forsakringskassan/eslint-config-angular",
     "@forsakringskassan/eslint-config-cli",
     "@forsakringskassan/eslint-config-cypress",
     "@forsakringskassan/eslint-config-jest",

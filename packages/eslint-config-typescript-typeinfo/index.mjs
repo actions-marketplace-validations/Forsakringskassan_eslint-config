@@ -34,7 +34,7 @@ function merge(result, it) {
 const strict = tseConfig.strictTypeCheckedOnly.reduce(merge, {});
 const stylistic = tseConfig.stylisticTypeCheckedOnly.reduce(merge, {});
 
-const config = defineConfig({
+const defaultConfig = defineConfig({
     name: "@forsakringskassan/eslint-config-typescript-typeinfo",
     files: ["**/*.{ts,cts,mts}"],
     ignores: [
@@ -137,9 +137,10 @@ const config = defineConfig({
  * @param {Config} [override]
  * @returns {Config}
  */
-export default (tsconfigrootDir, override) => {
-    const merged = merge(config, override ?? {});
+const config = (tsconfigrootDir, override) => {
+    const merged = merge(defaultConfig, override ?? {});
     merged.languageOptions.parserOptions.tsconfigRootDir =
         tsconfigrootDir ?? process.cwd();
     return merged;
 };
+export default config;

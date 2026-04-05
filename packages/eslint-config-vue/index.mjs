@@ -47,7 +47,7 @@ const recommended = eslintPluginVue.configs["flat/recommended"].reduce(
     {},
 );
 
-const config = defineConfig({
+const defaultConfig = defineConfig({
     name: "@forsakringskassan/eslint-config-vue",
     files: ["**/*.vue"],
 
@@ -76,6 +76,13 @@ const config = defineConfig({
 
         "@typescript-eslint/no-object-literal-type-assertion": ["off"],
 
+        /* due to issues using template refs without setting explicit type */
+        "@typescript-eslint/no-unsafe-argument": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/no-unsafe-call": "off",
+        "@typescript-eslint/no-unsafe-member-access": "off",
+        "@typescript-eslint/no-unsafe-return": "off",
+
         /* common pattern for props destructuring is to explicitly assign "undefined", which clashes with this rule */
         "@typescript-eslint/no-useless-default-assignment": "off",
 
@@ -83,6 +90,18 @@ const config = defineConfig({
 
         /* documentation for vue components does not adhere with tsdoc syntax */
         "tsdoc/syntax": "off",
+
+        /* for Vue components we use PascalCase instead of kebab-case */
+        "unicorn/filename-case": [
+            "error",
+            {
+                case: "pascalCase",
+                ignore: [
+                    /* used by @forsakringskassan/vite-lib-config as default entrypoint */
+                    "^app.vue$",
+                ],
+            },
+        ],
 
         /* this rule warns about the order of the top-level tags */
         "vue/block-order": [
@@ -149,4 +168,5 @@ const config = defineConfig({
  * @param {Config} [override]
  * @returns {Config}
  */
-export default (override) => merge(config, override ?? {});
+const config = (override) => merge(defaultConfig, override ?? {});
+export default config;
