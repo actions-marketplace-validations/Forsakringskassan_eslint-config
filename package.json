@@ -1,6 +1,6 @@
 {
   "name": "@forsakringskassan/eslint-config-monorepo",
-  "version": "14.1.1",
+  "version": "14.1.2",
   "private": true,
   "description": "Försäkringskassans eslint shareable config",
   "homepage": "https://github.com/Forsakringskassan/eslint-config",
@@ -44,7 +44,7 @@
     "jest": "30.3.0",
     "lerna": "9.0.7",
     "minimatch": "10.2.5",
-    "npm-pkg-lint": "4.6.2",
+    "npm-pkg-lint": "4.6.3",
     "svelte": "5.55.1",
     "typescript": "6.0.2"
   },

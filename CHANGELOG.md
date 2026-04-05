@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 14.1.2 (2026-04-05)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-import-resolver-node to v0.3.10 036d855
+
 ## 14.1.1 (2026-04-04)
 
 ### Bug Fixes
