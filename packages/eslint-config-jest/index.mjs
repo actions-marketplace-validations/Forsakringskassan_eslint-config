@@ -56,6 +56,7 @@ const defaultConfig = defineConfig({
 
         "jest/consistent-test-it": ["error", { fn: "it" }],
         "jest/no-alias-methods": "error",
+        "jest/no-conditional-in-test": "error",
         "jest/no-disabled-tests": "warn",
         "jest/no-duplicate-hooks": "error",
         "jest/no-focused-tests": "warn",
@@ -64,7 +65,24 @@ const defaultConfig = defineConfig({
             { maxSize: 25, inlineMaxSize: 10 },
         ],
         "jest/no-test-prefixes": "warn",
+        "jest/no-test-return-statement": "error",
+        "jest/padding-around-after-all-blocks": "warn",
+        "jest/padding-around-after-each-blocks": "warn",
+        "jest/padding-around-before-all-blocks": "warn",
+        "jest/padding-around-before-each-blocks": "warn",
+        "jest/padding-around-describe-blocks": "warn",
+        "jest/padding-around-expect-groups": "off",
+        "jest/padding-around-test-blocks": "warn",
+        "jest/prefer-comparison-matcher": "error",
+        "jest/prefer-equality-matcher": "error",
+        "jest/prefer-expect-assertions": "error",
+        "jest/prefer-hooks-in-order": "error",
         "jest/prefer-hooks-on-top": "error",
+        "jest/prefer-importing-jest-globals": "error",
+        "jest/prefer-jest-mocked": "error",
+        "jest/prefer-lowercase-title": "off", // Disabled since we want to allow uppercase titles when for example testing Classes or Vue Components.
+        "jest/prefer-mock-promise-shorthand": "error",
+        "jest/prefer-spy-on": "error",
         "jest/prefer-todo": "error",
 
         /* jest uses @jest-* tags for per-file configuration */
@@ -80,8 +98,12 @@ const defaultConfig = defineConfig({
                     kebabCase: true,
                     pascalCase: true,
                 },
+                checkDirectories: false,
             },
         ],
+
+        "unicorn/no-non-function-verb-prefix": "off", // interferes with jest.spyOn()
+        "unicorn/no-top-level-assignment-in-function": "off", // variables are often assigned from {beforeEach,beforeAll} */
     },
 });
 

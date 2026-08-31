@@ -1,7 +1,8 @@
-import test from "node:test";
+import test, { describe } from "node:test";
 import globals from "globals";
 import { minimatch } from "minimatch";
 import defaultConfig from "./packages/eslint-config/index.mjs";
+import cliConfig from "./packages/eslint-config-cli/index.mjs";
 import cypressConfig from "./packages/eslint-config-cypress/index.mjs";
 import jestConfig from "./packages/eslint-config-jest/index.mjs";
 import svelteConfig from "./packages/eslint-config-svelte/index.mjs";
@@ -81,7 +82,7 @@ function serialize(value, parent) {
                 }
                 const values = [
                     ...complete.map(({ name }) => `...${name}`),
-                    ...Array.from(remainder, (it) => `${it}`),
+                    ...Array.from(remainder, (it) => it),
                 ];
                 return [key, values];
             }
@@ -112,6 +113,15 @@ for (const pkg of packages) {
         t.assert.snapshot(serialize(config));
     });
 }
+
+describe("workspace configuration", () => {
+    test(`@forsakringskassan/eslint-config-cli should handle workspace configuration`, async (t) => {
+        const config = cliConfig({
+            workspaces: ["docs", "packages/*"],
+        });
+        t.assert.snapshot(config.files);
+    });
+});
 
 const config = [
     ...defaultConfig,

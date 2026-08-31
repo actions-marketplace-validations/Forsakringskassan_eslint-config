@@ -38,10 +38,14 @@ const defaultConfig = defineConfig({
     name: "@forsakringskassan/eslint-config-typescript-typeinfo",
     files: ["**/*.{ts,cts,mts}"],
     ignores: [
-        "cypress.config.ts",
-        "jest.config.{js,ts}",
-        "jest.setup.{js,ts}",
-        "vite.config.{ts,mts}",
+        "**/*.d.ts",
+        "**/cypress.config.{ts,mts}",
+        "**/jest.config.{ts,mts}",
+        "**/jest.setup.{ts,mts}",
+        "**/vite.config.{ts,mts}",
+        "**/vitest.config.{ts,mts}",
+        "**/vitest.global.{ts,mts}",
+        "**/vitest.setup.{ts,mts}",
     ],
 
     languageOptions: {
@@ -60,13 +64,13 @@ const defaultConfig = defineConfig({
         ...strict.rules,
         ...stylistic.rules,
 
-        /* disable overlapping rules from eslint-plugin-import */
-        "import/named": "off",
-        "import/namespace": "off",
-        "import/default": "off",
-        "import/no-named-as-default-member": "off",
-        "import/no-unresolved": "off",
-        "import/extensions": "off",
+        /* disable overlapping rules from eslint-plugin-import-x */
+        "import-x/named": "off",
+        "import-x/namespace": "off",
+        "import-x/default": "off",
+        "import-x/no-named-as-default-member": "off",
+        "import-x/no-unresolved": "off",
+        "import-x/extensions": "off",
 
         /* no-explicit-any is enabled and for now this rule is a bit to tedious
          * to actually help */

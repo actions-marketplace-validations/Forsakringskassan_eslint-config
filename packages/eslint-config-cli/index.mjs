@@ -1,7 +1,12 @@
+import path from "node:path/posix";
 import globals from "globals";
 
 /**
  * @typedef {import("eslint").Linter.Config} Config
+ */
+
+/**
+ * @typedef {{ workspaces?: string[] }} PackageJson
  */
 
 /**
@@ -30,9 +35,8 @@ function merge(result, it) {
 const defaultConfig = defineConfig({
     name: "@forsakringskassan/eslint-config-cli",
     files: [
-        "*.{js,ts,cjs,mjs}",
-        "**/scripts/*.{js,ts,cjs,mjs}",
-        "{internal,packages}/*/*.{js,ts,cjs,mjs}",
+        "*.{js,ts,cjs,mjs,cts,mts}",
+        "**/scripts/*.{js,ts,cjs,mjs,cts,mts}",
     ],
     languageOptions: {
         globals: {
@@ -41,12 +45,69 @@ const defaultConfig = defineConfig({
     },
     rules: {
         "no-console": "off",
+        "unicorn/no-top-level-side-effects": "off",
     },
 });
 
 /**
- * @param {Config} [override]
+ * @param {PackageJson | undefined} pkg
  * @returns {Config}
  */
-const config = (override) => merge(defaultConfig, override ?? {});
-export default config;
+function getDefaultConfig(pkg) {
+    const files = [...defaultConfig.files];
+    if (pkg?.workspaces) {
+        for (const workspace of pkg.workspaces) {
+            files.push(path.join(workspace, files[0]));
+        }
+    }
+    return {
+        ...defaultConfig,
+        files,
+    };
+}
+
+/**
+ * @param {Config | PackageJson} value
+ * @returns {value is PackageJson}
+ */
+function isPkg(value) {
+    if (!value) {
+        return false;
+    }
+    /* handle imported package.json without workspaces */
+    if (Object.hasOwn(value, "name") && Object.hasOwn(value, "version")) {
+        return true;
+    }
+    /* handle handcrafted object with only workspaces set */
+    if (Object.hasOwn(value, "workspaces")) {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * @param {[config?: Config] | [pkg: PackageJson, config?: Config]} [params]
+ * @returns {[pkg: PackageJson | undefined, config: Config | undefined]}
+ */
+function unpackArgs(params) {
+    if (params.length >= 2) {
+        return params;
+    }
+    if (params.length === 0) {
+        return [undefined, undefined];
+    }
+    const param = params[0];
+    if (isPkg(param)) {
+        return [param, undefined];
+    }
+    return [undefined, param];
+}
+
+/**
+ * @param {[config: Config] | [pkg: PackageJson, config?: Config]} [params]
+ * @returns {Config}
+ */
+export default function cliConfig(...params) {
+    const [pkg, override] = unpackArgs(params);
+    return merge(getDefaultConfig(pkg), override ?? {});
+}

@@ -1,5 +1,744 @@
 # CHANGELOG
 
+## 15.8.15 (2026-08-29)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-jest to v29.16.2 22700f4
+
+## 15.8.14 (2026-08-28)
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.68.0 791bb41
+
+## 15.8.13 (2026-08-27)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint to v10.9.1 078edc1
+
+## 15.8.12 (2026-08-26)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-cypress to v7.0.1 0f83be2
+
+## 15.8.11 (2026-08-25)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint to v10.9.0 c2aeda8
+
+## 15.8.10 (2026-08-21)
+
+### Bug Fixes
+
+* **deps:** update dependency svelte-eslint-parser to v1.8.1 55e5d64
+
+## 15.8.9 (2026-08-17)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-regexp to v3.2.0 7eb9701
+
+## 15.8.8 (2026-08-16)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-svelte to v3.23.0 f68443a
+
+## 15.8.7 (2026-08-15)
+
+### Bug Fixes
+
+* **deps:** update dependency globals to v17.11.0 35cbf36
+
+## 15.8.6 (2026-08-15)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-jest to v29.16.1 80d4719
+
+## 15.8.5 (2026-08-15)
+
+### Bug Fixes
+
+* **deps:** update dependency globals to v17.10.0 866a8f7
+
+## 15.8.4 (2026-08-14)
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.67.0 d52835c
+
+## 15.8.3 (2026-08-13)
+
+### Bug Fixes
+
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.27 9d69234
+
+## 15.8.2 (2026-08-11)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint to v10.8.1 2b54a91
+
+## 15.8.1 (2026-08-10)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config-cli:** match mts files for cli configuration d19080e
+
+## 15.8.0 (2026-08-10)
+
+### Features
+
+* **@forsakringskassan/eslint-config-cli:** cli config handles workspaces configuration 05611ab
+
+## 15.7.0 (2026-08-09)
+
+### Features
+
+* **deps:** update dependency eslint-plugin-cypress to v7 77e2bce
+
+## 15.6.4 (2026-08-09)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config:** require file extensions for mts files 0923f00
+
+## 15.6.3 (2026-08-08)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config-typescript-typeinfo:** ignore typeinfo rules for `vitest.config.{ts,mts}` 1df718d
+* **@forsakringskassan/eslint-config-typescript-typeinfo:** ignore typeinfo rules for `vitest.global.{ts,mts}` ee5d8e8
+* **@forsakringskassan/eslint-config-typescript-typeinfo:** ignore typeinfo rules for `vitest.setup.{ts,mts}` 7afa2aa
+* **@forsakringskassan/eslint-config-typescript-typeinfo:** ignore typeinfo rules for configuration files in subdirectories (e.g. monorepo) 2f94ad4
+* **@forsakringskassan/eslint-config-typescript-typeinfo:** ignore typeinfo rules for dts files 7300d73
+
+## 15.6.2 (2026-08-08)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-cypress to v6.4.4 16dbfaf
+
+## 15.6.1 (2026-08-07)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-mocha to v12.0.2 8c4d799
+
+## 15.6.0 (2026-08-07)
+
+### Features
+
+* **deps:** update dependency eslint-plugin-unicorn to v73 12512c4
+
+## 15.5.5 (2026-08-07)
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.66.0 21c5fef
+
+## 15.5.4 (2026-08-06)
+
+### Bug Fixes
+
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.26 a557e6a
+
+## 15.5.3 (2026-08-05)
+
+### Bug Fixes
+
+* **deps:** update dependency globals to v17.9.0 6005b1a
+
+## 15.5.2 (2026-08-05)
+
+### Bug Fixes
+
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.25 2079cba
+
+## 15.5.1 (2026-07-31)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-mocha to v12.0.1 7e3dabb
+
+## 15.5.0 (2026-07-30)
+
+### Features
+
+* **deps:** update dependency eslint-plugin-mocha to v12 d7bb85d
+
+## 15.4.10 (2026-07-29)
+
+### Bug Fixes
+
+* **deps:** update dependency globals to v17.8.0 8475ef5
+
+## 15.4.9 (2026-07-28)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint to v10.8.0 119cb1f
+
+## 15.4.8 (2026-07-27)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-jest to v29.16.0 20839a0
+
+## 15.4.7 (2026-07-27)
+
+### Bug Fixes
+
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.24 7d49f1f
+
+## 15.4.6 (2026-07-25)
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.65.0 ddb7468
+
+## 15.4.5 (2026-07-24)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-jest to v29.15.5 8f08a60
+
+## 15.4.4 (2026-07-23)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-vue to v10.10.0 309e92e
+
+## 15.4.3 (2026-07-23)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-svelte to v3.22.0 ece58c7
+
+## 15.4.2 (2026-07-22)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-svelte to v3.21.0 53cd756
+
+## 15.4.1 (2026-07-20)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config:** disable `unicorn/prefer-simple-condition-first` (refs SFKUI-6500) 99070d2
+
+## 15.4.0 (2026-07-20)
+
+### Features
+
+* **deps:** update dependency eslint-plugin-unicorn to v72 86519f5
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.64.0 331e04b
+
+## 15.3.17 (2026-07-18)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config-cypress:** disable `sonarjs/no-fixed-wait-in-tests` for cypress fea910a
+* **@forsakringskassan/eslint-config:** lower `import-x/order` to warning 1289797
+
+## 15.3.16 (2026-07-18)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-sonarjs to v4.2.0 7bb53d9
+
+## 15.3.15 (2026-07-18)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config:** few more unicorn rules lowered to warning f1e6488
+
+## 15.3.14 (2026-07-18)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-cypress to v6.4.3 a6c90a4
+
+## 15.3.13 (2026-07-17)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config:** disable `unicorn/prefer-location-assign` for jsdom compatibility ddad27a
+* **@forsakringskassan/eslint-config:** disable `unicorn/require-css-escape` for jsdom compatibility f4da004
+* **@forsakringskassan/eslint-config:** disable redundant `sonarjs/no-clear-text-protocols` 47158ae
+* **@forsakringskassan/eslint-config:** lower some errors to warnings 5297653
+
+## 15.3.12 (2026-07-15)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config-vue:** disable `unicorn/no-top-level-assignment-in-function` for vue config e0490e2
+
+## 15.3.11 (2026-07-15)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config:** disable redundant `sonarjs/no-alphabetical-sort` 3d50f7d
+
+## 15.3.10 (2026-07-15)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config-cypress:** disable `unicorn/prefer-await` for cypress config f365eaf
+
+## 15.3.9 (2026-07-15)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config:** disable `unicorn/no-top-level-side-effects` for example config 9459380
+
+## 15.3.8 (2026-07-15)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config:** disable `unicorn/no-top-level-side-effects` for app config 15d6fd7
+
+## 15.3.7 (2026-07-14)
+
+### Bug Fixes
+
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.23 31ce5a9
+
+## 15.3.6 (2026-07-14)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint to v10.7.0 b01e747
+
+## 15.3.5 (2026-07-12)
+
+### Bug Fixes
+
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.22 ([#208](undefined/Forsakringskassan/eslint-config/issues/208)) 2d1044d
+
+## 15.3.4 (2026-07-10)
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.63.0 0d30a10
+
+## 15.3.3 (2026-07-08)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config:** disable `unicorn/no-top-level-assignment-in-function` for all configs c7ee89a
+
+## 15.3.2 (2026-07-08)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config-jest, @forsakringskassan/eslint-config-vitest:** disable some new unicorn rules for tests 4f1fa5c
+
+## 15.3.1 (2026-07-07)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config:** ignore directories for `unicorn/filename-case` 03aab3a
+
+## 15.3.0 (2026-07-07)
+
+### Features
+
+* **deps:** update dependency eslint-plugin-unicorn to v70 bc28aa1
+
+## 15.2.0 (2026-07-03)
+
+### Features
+
+* **@forsakringskassan/eslint-config-jest:** enable `jest/no-conditinal-in-test` rule for symmetry with vitest config c10b2d2
+* **@forsakringskassan/eslint-config-jest:** enable `jest/no-test-return-statement` rule for symmetry with vitest config 4d4bc55
+* **@forsakringskassan/eslint-config-jest:** enable `jest/padding-around-*` rules for symmetry with vitest config df820f3
+* **@forsakringskassan/eslint-config-jest:** enable `jest/prefer-comparison-matcher` rule for symmetry with vitest config ea619d4
+* **@forsakringskassan/eslint-config-jest:** enable `jest/prefer-equality-matcher` rule for symmetry with vitest config 82c41eb
+* **@forsakringskassan/eslint-config-jest:** enable `jest/prefer-expect-assertions` rule for symmetry with vitest config eb6eaba
+* **@forsakringskassan/eslint-config-jest:** enable `jest/prefer-hooks-in-order` rule for symmetry with vitest config c4e610d
+* **@forsakringskassan/eslint-config-jest:** enable `jest/prefer-importing-jest-globals` rule for symmetry with vitest config f186a22
+* **@forsakringskassan/eslint-config-jest:** enable `jest/prefer-jest-mocked` rule for symmetry with vitest config 68455a6
+* **@forsakringskassan/eslint-config-jest:** enable `jest/prefer-mock-promise-shorthand` rule for symmetry with vitest config a3e6390
+* **@forsakringskassan/eslint-config-jest:** enable `jest/prefer-spy-on` rule for symmetry with vitest config 8a57087
+
+## 15.1.12 (2026-07-03)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-jest to v29.15.4 3593505
+
+## 15.1.11 (2026-07-03)
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.62.1 d68ba46
+
+## 15.1.10 (2026-07-02)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-cypress to v6.4.2 827096a
+
+## 15.1.9 (2026-07-02)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-import-x to v4.17.1 d3f051d
+
+## 15.1.8 (2026-06-30)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-svelte to v3.20.0 abe08fe
+
+## 15.1.7 (2026-06-30)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint to v10.6.0 68cc774
+
+## 15.1.6 (2026-06-29)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-regexp to v3.1.1 575d79f
+
+## 15.1.5 (2026-06-29)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-jest to v29.15.3 9c1c6e0
+
+## 15.1.4 (2026-06-29)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-import-x to v4.17.0 9172b75
+
+## 15.1.3 (2026-06-29)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-sonarjs to v4.1.0 a656325
+
+## 15.1.2 (2026-06-26)
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.62.0 d17c387
+
+## 15.1.1 (2026-06-26)
+
+### Bug Fixes
+
+* **deps:** update dependency globals to v17.7.0 c128efe
+
+## 15.1.0 (2026-06-23)
+
+### Features
+
+* **@forsakringskassan/eslint-config:** replace `unicorn/better-regex` and `sonarjs/slow-regex` with `eslint-plugin-regexp` 87f2f3d
+
+## 15.0.19 (2026-06-19)
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.61.1 ffee27b
+
+## 15.0.18 (2026-06-17)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config:** disable `sonarjs/no-redundant-optional` 9294e3b
+
+## 15.0.17 (2026-06-16)
+
+### Bug Fixes
+
+* **deps:** update eslint monorepo to v10.5.0 0f0cf4f
+
+## 15.0.16 (2026-06-14)
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.61.0 a269983
+
+## 15.0.15 (2026-06-13)
+
+### Bug Fixes
+
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.20 463f3f6
+
+## 15.0.14 (2026-06-07)
+
+### Bug Fixes
+
+* **deps:** update dependency svelte-eslint-parser to v1.8.0 bda5c0d
+
+## 15.0.13 (2026-06-07)
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.60.1 b9f969b
+
+## 15.0.12 (2026-06-07)
+
+### Bug Fixes
+
+* **deps:** update dependency svelte-eslint-parser to v1.7.1 6e9a9b8
+
+## 15.0.11 (2026-06-06)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-vue to v10.9.2 7504bdb
+
+## 15.0.10 (2026-06-06)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-import-resolver-typescript to v4.4.5 22300f2
+
+## 15.0.9 (2026-06-06)
+
+### Bug Fixes
+
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.19 a79b50b
+
+## 15.0.8 (2026-06-03)
+
+### Bug Fixes
+
+* **deps:** update dependency svelte-eslint-parser to v1.7.0 ee22b9f
+
+## 15.0.7 (2026-06-03)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-svelte to v3.19.0 c21676d
+
+## 15.0.6 (2026-06-02)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint to v10.4.1 1f484c9
+
+## 15.0.5 (2026-05-31)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-prettier to v5.5.6 d5cb3eb
+
+## 15.0.4 (2026-05-30)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-svelte to v3.18.0 06424d4
+
+## 15.0.3 (2026-05-30)
+
+### Bug Fixes
+
+* **deps:** update dependency @eslint-community/eslint-plugin-eslint-comments to v4.7.2 e391d28
+
+## 15.0.2 (2026-05-29)
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.60.0 d5a8f8d
+
+## 15.0.1 (2026-05-27)
+
+### Bug Fixes
+
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.18 6f0d80d
+
+## 15.0.0 (2026-05-25)
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** This configuration now uses the `eslint-plugin-import-x` fork
+instead of `eslint-plugin-import`. If your repo contains overrides or
+eslint-disable suppressions they must now be changed to use the new rule names
+with the `import-x` prefix. Or better yet, file a bug describing the scenario so
+it can be fixed properly.
+
+### Features
+
+* **deps:** migrate from `eslint-plugin-import` to `eslint-plugin-import-x` 27d866e
+* **deps:** update eslint to v10 83639cd
+
+## 14.2.3 (2026-05-24)
+
+### Bug Fixes
+
+* **@forsakringskassan/eslint-config-vitest:** disable vitest/prefer-lowercase-title 006cfc6
+
+## 14.2.2 (2026-05-22)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-mocha to v11.3.0 9913350
+
+## 14.2.1 (2026-05-22)
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.59.4 a7672e6
+
+## 14.2.0 (2026-05-20)
+
+### Features
+
+* **@forsakringskassan/eslint-config:** update example config to include docs, tests folders aa90c6a
+
+## 14.1.27 (2026-05-19)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-import-resolver-node to v0.4.0 56cacb4
+
+## 14.1.26 (2026-05-15)
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.59.3 5e24f52
+
+## 14.1.25 (2026-05-11)
+
+### Bug Fixes
+
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.17 85e5641
+
+## 14.1.24 (2026-05-09)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-cypress to v6.4.1 6e59d31
+
+## 14.1.23 (2026-05-09)
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.59.2 5842076
+
+## 14.1.22 (2026-05-08)
+
+### Bug Fixes
+
+* **deps:** update dependency svelte-eslint-parser to v1.6.1 88e0c6e
+
+## 14.1.21 (2026-05-08)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-vue to v10.9.1 5c9818a
+
+## 14.1.20 (2026-05-04)
+
+### Bug Fixes
+
+* **deps:** update dependency globals to v17.6.0 8324ab9
+
+## 14.1.19 (2026-05-02)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-cypress to v6.4.0 10a69f5
+
+## 14.1.18 (2026-04-28)
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.59.1 6df3520
+
+## 14.1.17 (2026-04-25)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-svelte to v3.17.1 05dd2e4
+
+## 14.1.16 (2026-04-25)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-vue to v10.9.0 0d6c10c
+
+## 14.1.15 (2026-04-23)
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.59.0 1ee8625
+
+## 14.1.14 (2026-04-19)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-sonarjs to v4.0.3 16ec807
+
+## 14.1.13 (2026-04-18)
+
+### Bug Fixes
+
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.16 5b9ed7e
+
+## 14.1.12 (2026-04-18)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-cypress to v6.3.1 6960fd9
+
+## 14.1.11 (2026-04-17)
+
+### Bug Fixes
+
+* **deps:** update dependency globals to v17.5.0 af54a0b
+
+## 14.1.10 (2026-04-16)
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.58.2 d9f1253
+
+## 14.1.9 (2026-04-13)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-jest to v29.15.2 97bcc0d
+
+## 14.1.8 (2026-04-12)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-cypress to v6.3.0 a4112d7
+
+## 14.1.7 (2026-04-12)
+
+### Bug Fixes
+
+* **deps:** update dependency @vitest/eslint-plugin to v1.6.15 a56ac26
+
+## 14.1.6 (2026-04-11)
+
+### Bug Fixes
+
+* **deps:** update typescript-eslint monorepo to v8.58.1 e7db34a
+
+## 14.1.5 (2026-04-10)
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-cypress to v6.2.3 cf76c31
+
 ## 14.1.4 (2026-04-06)
 
 ### Bug Fixes

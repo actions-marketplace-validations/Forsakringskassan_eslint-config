@@ -77,6 +77,7 @@ export const [first, second, ...rest] = take(fibonacci(), 10);
 const foo = { a: 1, b: 2, c: 3 };
 const { a, ...fooWithoutA } = foo;
 
+/* eslint-disable-next-line unicorn/no-top-level-side-effects -- example only */
 sink(fooWithoutA);
 
 export function callbackWithoutThis(this: void): void {
@@ -111,6 +112,7 @@ export function fnExpectingVoidCallback(cb: () => void): void {
     cb();
 }
 
+/* eslint-disable-next-line unicorn/no-top-level-side-effects -- example only */
 fnExpectingVoidCallback(async () => {
     await Promise.resolve();
 });

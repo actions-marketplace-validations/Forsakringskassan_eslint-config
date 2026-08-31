@@ -1,5 +1,7 @@
 import { Linter } from "eslint";
 
-declare const config: (config?: Linter.Config) => Linter.Config;
-
-export default config;
+export default function cliConfig(config?: Linter.Config): Linter.Config;
+export default function cliConfig(
+    pkg: { workspaces?: string[] },
+    config?: Linter.Config,
+): Linter.Config;

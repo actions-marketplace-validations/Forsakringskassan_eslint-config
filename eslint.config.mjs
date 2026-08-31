@@ -43,7 +43,7 @@ export default [
         name: "local",
         rules: {
             /* cannot be tester easily in examples (as the files doesn't exist) */
-            "import/no-unresolved": "off",
+            "import-x/no-unresolved": "off",
         },
     },
 ];

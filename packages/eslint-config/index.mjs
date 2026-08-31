@@ -1,9 +1,10 @@
-import { fileURLToPath } from "node:url";
 import js from "@eslint/js";
 import eslintCommentsPlugin from "@eslint-community/eslint-plugin-eslint-comments";
 import prettierConfig from "eslint-config-prettier";
-import importPlugin from "eslint-plugin-import";
+import { createTypeScriptImportResolver } from "eslint-import-resolver-typescript";
+import { createNodeResolver, importX } from "eslint-plugin-import-x";
 import prettierPlugin from "eslint-plugin-prettier";
+import regexpPlugin from "eslint-plugin-regexp";
 import sonarjsPlugin from "eslint-plugin-sonarjs";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import globals from "globals";
@@ -44,9 +45,43 @@ function merge(result, it) {
  * @returns {RulesRecord}
  */
 function filterRules(rules, predicate) {
-    return Object.fromEntries(
-        Object.entries(rules).filter(([key]) => predicate(key)),
-    );
+    const entries = Object.entries(rules).filter(([key]) => predicate(key));
+    return Object.fromEntries(entries);
+}
+
+/**
+ * Returns true if rule is configured with error severity.
+ *
+ * @returns {boolean}
+ */
+function isErrorSeverity(config) {
+    if (Array.isArray(config)) {
+        config = config[0];
+    }
+    return config === "error";
+}
+
+/**
+ * Downgrades errors to warnings.
+ *
+ * | input   | output |
+ * |---------|--------|
+ * | "error" | "warn" |
+ * | "warn"  | "warn" |
+ * | "off"   | "off"  |
+ *
+ * @param {RulesRecord} rules
+ * @param {string[]} list
+ * @returns {RulesRecord}
+ */
+function downgradeToWarning(rules, list) {
+    const entries = Object.entries(rules).map(([key, config]) => {
+        if (list.includes(key) && isErrorSeverity(config)) {
+            config = "warn";
+        }
+        return [key, config];
+    });
+    return Object.fromEntries(entries);
 }
 
 export default [
@@ -57,20 +92,17 @@ export default [
     defineConfig({
         plugins: {
             prettier: prettierPlugin,
-            import: importPlugin,
+            "import-x": importX,
             "@eslint-community/eslint-comments": eslintCommentsPlugin,
+            regexp: regexpPlugin,
             sonarjs: sonarjsPlugin,
             unicorn: eslintPluginUnicorn,
         },
         settings: {
-            "import/resolver": {
-                [fileURLToPath(
-                    import.meta.resolve("eslint-import-resolver-node"),
-                )]: true,
-                [fileURLToPath(
-                    import.meta.resolve("eslint-import-resolver-typescript"),
-                )]: true,
-            },
+            "import-x/resolver-next": [
+                createNodeResolver(),
+                createTypeScriptImportResolver(),
+            ],
         },
         rules: {
             ...filterRules(prettierConfig.rules, (rule) => {
@@ -95,8 +127,9 @@ export default [
                 return true;
             }),
             ...prettierPlugin.configs.recommended.rules,
-            ...importPlugin.configs.errors.rules,
+            ...importX.flatConfigs.errors.rules,
             ...eslintCommentsPlugin.configs.recommended.rules,
+            ...regexpPlugin.configs.recommended.rules, // eslint-disable-line import-x/no-named-as-default-member -- to match other plugins here
             ...sonarjsPlugin.configs.recommended.rules,
         },
     }),
@@ -161,19 +194,27 @@ export default [
 
             "sonarjs/argument-type": "off", // handled by typescript (and this rule is sometimes wrong)
             "sonarjs/arguments-order": "off", // another slow rule, would be nice to have enabled thought
+            "sonarjs/assertions-in-tests": "off", // could be useful but yields lots of false positives (e.g. node:test isn't recognized)
             "sonarjs/deprecation": "off", // covered by @typescript-eslint/no-deprecated (and this rule crashes on .svelte files)
             "sonarjs/function-return-type": "off", // overly broad and opinionated, let typescript deal with this
+            "sonarjs/no-alphabetical-sort": "off", // covered by unicorn/require-array-sort-compare
+            "sonarjs/no-clear-text-protocols": "off", // covered by unicorn/prefer-https
             "sonarjs/no-commented-code": "off", // neat rule but is very very slow (over 50% of the total linting time)
             "sonarjs/no-control-regex": "off", // covered by no-control-regexp
             "sonarjs/no-empty-test-file": "off", // could be useful but it does not handle it.each or similar constructs thus yields more false positives than its worth */
+            "sonarjs/no-exclusive-tests": "off", // covered by jest/no-focused-tests and mocha/no-exclusive-tests
+            "sonarjs/no-redundant-optional": "off", // flags "foo?: string | undefined" as redundant even if `exactOptionalPropertyTypes` tsconfig is enabled */
             "sonarjs/no-selector-parameter": "off", // not always possible (e.g. watcher handler in vue)
             "sonarjs/no-skipped-tests": "off", // covered by jest/no-disabled-tests and mocha/no-pending-tests
-            "sonarjs/no-exclusive-tests": "off", // covered by jest/no-focused-tests and mocha/no-exclusive-tests
             "sonarjs/no-small-switch": "off", // prefer to use small switches when the intention is to all more cases later
+            "sonarjs/no-trivial-assertions": "off", // produces a bit too much noise
             "sonarjs/no-unused-vars": "off", // covered by @typescript-eslint/no-unused-vars
+            "sonarjs/parameterized-tests": "off", // prefer explicit test titles over non-descript parameterized
             "sonarjs/prefer-nullish-coalescing": "off", // requires typescript and strictNullChecks, which is sane, but we also use @typescript-eslint/prefer-nullish-coalescing so this becomes redundant
             "sonarjs/prefer-regexp-exec": "off", // covered by @typescript-eslint/prefer-regexp-exec
             "sonarjs/redundant-type-aliases": "off", // "redundant" type aliases helps with self-documenting code
+            "sonarjs/slow-regex": "off", // covered by regexp/no-super-linear-backtracking
+            "sonarjs/super-linear-regex": "off", // covered by regexp/no-super-linear-backtracking
             "sonarjs/todo-tag": "off", // want to be able to leave todo tasks
             "sonarjs/unused-import": "off", // covered by @typescript-eslint/no-unused-vars
             "sonarjs/unused-named-groups": "off", // named groups can help readability even if not used
@@ -202,157 +243,158 @@ export default [
 
             /* enable eslint-plugin-unicorn */
             ...eslintPluginUnicorn.configs.recommended.rules,
-            "unicorn/better-regex": "error",
+            ...downgradeToWarning(
+                eslintPluginUnicorn.configs.recommended.rules,
+                [
+                    "unicorn/explicit-timer-delay",
+                    "unicorn/logical-assignment-operators",
+                    "unicorn/max-nested-calls",
+                    "unicorn/no-await-expression-member",
+                    "unicorn/no-break-in-nested-loop",
+                    "unicorn/no-computed-property-existence-check",
+                    "unicorn/no-confusing-array-splice",
+                    "unicorn/no-declarations-before-early-exit",
+                    "unicorn/no-duplicate-if-branches",
+                    "unicorn/no-duplicate-loops",
+                    "unicorn/no-duplicate-loops",
+                    "unicorn/no-incorrect-query-selector",
+                    "unicorn/no-negated-array-predicate",
+                    "unicorn/no-unnecessary-boolean-comparison",
+                    "unicorn/no-unnecessary-splice",
+                    "unicorn/no-unreadable-for-of-expression",
+                    "unicorn/no-unsafe-string-replacement",
+                    "unicorn/no-useless-boolean-cast",
+                    "unicorn/no-useless-coercion",
+                    "unicorn/no-useless-else",
+                    "unicorn/no-useless-logical-operand",
+                    "unicorn/no-useless-recursion",
+                    "unicorn/no-useless-spread",
+                    "unicorn/no-useless-template-literals",
+                    "unicorn/numeric-separators-style",
+                    "unicorn/operator-assignment",
+                    "unicorn/prefer-array-from-map",
+                    "unicorn/prefer-array-some",
+                    "unicorn/prefer-at",
+                    "unicorn/prefer-await",
+                    "unicorn/prefer-direct-iteration",
+                    "unicorn/prefer-dom-node-append",
+                    "unicorn/prefer-dom-node-remove",
+                    "unicorn/prefer-dom-node-replace-children",
+                    "unicorn/prefer-dom-node-text-content",
+                    "unicorn/prefer-early-return",
+                    "unicorn/prefer-else-if",
+                    "unicorn/prefer-https",
+                    "unicorn/prefer-includes-over-repeated-comparisons",
+                    "unicorn/prefer-iterator-helpers",
+                    "unicorn/prefer-iterator-to-array",
+                    "unicorn/prefer-iterator-to-array-at-end",
+                    "unicorn/prefer-logical-operator-over-ternary",
+                    "unicorn/prefer-math-constants",
+                    "unicorn/prefer-modern-dom-apis",
+                    "unicorn/prefer-number-is-safe-integer",
+                    "unicorn/prefer-object-define-properties",
+                    "unicorn/prefer-object-iterable-methods",
+                    "unicorn/prefer-queue-microtask",
+                    "unicorn/prefer-set-has",
+                    "unicorn/prefer-simple-sort-comparator",
+                    "unicorn/prefer-split-limit",
+                    "unicorn/prefer-string-repeat",
+                    "unicorn/prefer-string-replace-all",
+                    "unicorn/prefer-switch",
+                    "unicorn/prefer-toggle-attribute",
+                    "unicorn/prefer-type-literal-last",
+                    "unicorn/prefer-unicode-code-point-escapes",
+                    "unicorn/require-array-join-separator",
+                    "unicorn/require-array-sort-compare",
+                    "unicorn/require-css-escape",
+                ],
+            ),
             "unicorn/catch-error-name": "off",
             "unicorn/consistent-assert": "off",
+            "unicorn/consistent-boolean-name": "off",
+            "unicorn/consistent-class-member-order": "off",
+            "unicorn/consistent-compound-words": "off",
             "unicorn/consistent-date-clone": "off", // we prefer to use FDate instead of Date and structuredClone does not play well with jest
             "unicorn/consistent-empty-array-spread": "off",
-            "unicorn/consistent-existence-index-check": "error",
-            "unicorn/consistent-function-scoping": "error",
-            "unicorn/consistent-template-literal-escape": "error",
-            "unicorn/custom-error-definition": "error",
-            "unicorn/error-message": "error",
-            "unicorn/escape-case": "off", // typically not useful for this organisation
+            "unicorn/default-export-style": [
+                "error",
+                {
+                    /* right now this rule is too restrictive with functions */
+                    functions: "ignore",
+                    /* classes should be default exported inline */
+                    classes: "inline",
+                },
+            ],
+            "unicorn/escape-case": "off", // typically not useful for this organization
             "unicorn/expiring-todo-comments": "off", // could be useful later
             "unicorn/explicit-length-check": [
                 "error",
                 { "non-zero": "greater-than" },
             ],
             "unicorn/filename-case": [
+                /* enforce kebab-case in filenames */
                 "error",
                 {
                     case: "kebabCase",
+                    checkDirectories: false,
                     ignore: [
+                        "^__(fixtures|mocks|snapshots|tests)__$",
                         "^Gruntfile.js$",
                         /* ignore mocks for @forsakringskassan/apimock-express */
                         "_(get|post|put|delete).(js|cjs|mjs|ts)$",
                     ],
                 },
-            ], // enforce kebab-case in filenames
+            ],
             "unicorn/import-style": "off", // off for now
-            "unicorn/isolated-functions": "error",
-            "unicorn/new-for-builtins": "error",
+            "unicorn/name-replacements": "off", // maybe later
             "unicorn/no-abusive-eslint-disable": "off", // covered by eslint-plugin-eslint-comments
-            "unicorn/no-accessor-recursion": "error",
             "unicorn/no-anonymous-default-export": "off", // often used with configuration packages
-            "unicorn/no-array-callback-reference": "off", // opinionated, prefer to allow passing function references to array methods (and for most part typescript will handle this)
-            "unicorn/no-array-for-each": "error",
-            "unicorn/no-array-method-this-argument": "error",
+            "unicorn/no-array-callback-reference": "off", // opinionated, prefer to allow passing function references to array methods (and for most part TypeScript will handle this)
             "unicorn/no-array-reduce": "off", // allow usage of reduce()
-            "unicorn/no-array-reverse": "error", // prefer immutable .toReversed() (available in Node.js 20+)
-            "unicorn/no-array-sort": "error", // prefer immutable .toSorted() (available in Node.js 20+)
-            "unicorn/no-await-expression-member": "error",
-            "unicorn/no-await-in-promise-methods": "error",
-            "unicorn/no-console-spaces": "error",
-            "unicorn/no-document-cookie": "error",
             "unicorn/no-empty-file": "off",
-            "unicorn/no-for-loop": "error",
-            "unicorn/no-hex-escape": "error",
             "unicorn/no-immediate-mutation": "off",
-            "unicorn/no-instanceof-builtins": "error",
-            "unicorn/no-invalid-fetch-options": "off", // let typescript and tests handle this
-            "unicorn/no-invalid-remove-event-listener": "error",
-            "unicorn/no-magic-array-flat-depth": "error",
-            "unicorn/no-named-default": "off", // named default is useful for vue
+            "unicorn/no-invalid-argument-count": "off", // does not respect optional parameters (e.g. jsdoc [param])
+            "unicorn/no-invalid-fetch-options": "off", // let TypeScript and tests handle this
+            "unicorn/no-named-default": "off", // named default is useful for Vue.js
             "unicorn/no-negated-condition": "off", // mostly agree with the rule but sometimes its useful to have the common case first even if negated
             "unicorn/no-negation-in-equality-check": "off",
-            "unicorn/no-new-array": "error",
-            "unicorn/no-new-buffer": "error",
             "unicorn/no-null": "off", // prefer using null over undefined
-            "unicorn/no-object-as-default-parameter": "error",
-            "unicorn/no-process-exit": "off", // covered by n/no-process-exit (enabled by recommended-module preset)
-            "unicorn/no-single-promise-in-promise-methods": "error",
-            "unicorn/no-static-only-class": "off",
-            "unicorn/no-thenable": "off",
-            "unicorn/no-this-assignment": "error",
-            "unicorn/no-typeof-undefined": "error",
-            "unicorn/no-unnecessary-array-flat-depth": "error",
-            "unicorn/no-unnecessary-array-splice-count": "error",
-            "unicorn/no-unnecessary-await": "error",
+            "unicorn/no-this-outside-of-class": "off", // disagree somewhat with the rule, flags stateful objects
+            "unicorn/no-top-level-assignment-in-function": "off", // would be useful, right now this gives to many errors, maybe enable later
             "unicorn/no-unnecessary-polyfills": "off",
-            "unicorn/no-unnecessary-slice-end": "error",
             "unicorn/no-unreadable-array-destructuring": "off",
-            "unicorn/no-unreadable-iife": "off",
-            "unicorn/no-useless-collection-argument": "error",
-            "unicorn/no-useless-error-capture-stack-trace": "error",
-            "unicorn/no-useless-fallback-in-spread": "error",
-            "unicorn/no-useless-iterator-to-array": "error",
-            "unicorn/no-useless-length-check": "error",
-            "unicorn/no-useless-promise-resolve-reject": "error",
-            "unicorn/no-useless-spread": "error",
             "unicorn/no-useless-switch-case": "off",
             "unicorn/no-useless-undefined": "off", // opinionated, I prefer to explicitly pass undefined
-            "unicorn/no-zero-fractions": "error",
-            "unicorn/number-literal-case": [
-                "error",
-                { hexadecimalValue: "lowercase" },
-            ],
-            "unicorn/numeric-separators-style": "off",
-            "unicorn/prefer-add-event-listener": "error",
-            "unicorn/prefer-array-find": "error",
-            "unicorn/prefer-array-flat": "error",
-            "unicorn/prefer-array-flat-map": "error",
-            "unicorn/prefer-array-index-of": "error",
-            "unicorn/prefer-array-some": "error",
-            "unicorn/prefer-at": "error",
             "unicorn/prefer-bigint-literals": "off",
-            "unicorn/prefer-blob-reading-methods": "error",
-            "unicorn/prefer-class-fields": "error",
-            "unicorn/prefer-classlist-toggle": "error",
-            "unicorn/prefer-code-point": "error",
-            "unicorn/prefer-date-now": "error",
-            "unicorn/prefer-default-parameters": "error",
-            "unicorn/prefer-dom-node-append": "error",
-            "unicorn/prefer-dom-node-dataset": "error",
-            "unicorn/prefer-dom-node-remove": "error",
-            "unicorn/prefer-dom-node-text-content": "error",
-            "unicorn/prefer-event-target": "error",
-            "unicorn/prefer-export-from": "error",
+            "unicorn/prefer-boolean-return": "off", // creates inconsistent functions when using multiple conditions
+            "unicorn/prefer-dom-node-html-methods": "off", // not baseline as of 2026-07-20 (but should be enabled later)
             "unicorn/prefer-global-this": "off",
+            "unicorn/prefer-hoisting-branch-code": "off", // lots of false positives with TypeScript code
             "unicorn/prefer-import-meta-properties": "error",
-            "unicorn/prefer-includes": "error",
-            "unicorn/prefer-keyboard-event-key": "error",
-            "unicorn/prefer-logical-operator-over-ternary": "off",
-            "unicorn/prefer-math-min-max": "error",
-            "unicorn/prefer-math-trunc": "error",
-            "unicorn/prefer-modern-dom-apis": "error",
-            "unicorn/prefer-modern-math-apis": "error",
+            "unicorn/prefer-minimal-ternary": "off", // situational, i dont think `foo[expr ? "x": "y"].bar` is more readable than `expr ? foo.x.bar : foo.y.bar`.
             "unicorn/prefer-module": "off",
-            "unicorn/prefer-native-coercion-functions": "off",
-            "unicorn/prefer-negative-index": "error",
-            "unicorn/prefer-number-properties": "error",
-            "unicorn/prefer-object-from-entries": "error",
+            "unicorn/prefer-location-assign": "off", // jsdom does not impoement `Location.assign`
             "unicorn/prefer-optional-catch-binding": "off", // covered by sonarjs/no-ignored-exceptions
-            "unicorn/prefer-prototype-methods": "error",
-            "unicorn/prefer-query-selector": "error",
-            "unicorn/prefer-reflect-apply": "error",
-            "unicorn/prefer-regexp-test": "error",
-            "unicorn/prefer-response-static-json": "off",
-            "unicorn/prefer-set-has": "error",
-            "unicorn/prefer-set-size": "error",
-            "unicorn/prefer-simple-condition-first": "error",
+            "unicorn/prefer-promise-try": "off", // baseline but requires Node.js 23
+            "unicorn/prefer-queue-microtask": [
+                "warn",
+                { checkSetImmediate: true, checkSetTimeout: true },
+            ],
+            "unicorn/prefer-scoped-selector": "off",
+            "unicorn/prefer-simple-condition-first": "off", // too much noise
             "unicorn/prefer-single-call": "off",
             "unicorn/prefer-spread": "off", // for now
             "unicorn/prefer-string-raw": "off", // for now
-            "unicorn/prefer-string-replace-all": "error",
-            "unicorn/prefer-string-slice": "error",
-            "unicorn/prefer-string-starts-ends-with": "error",
-            "unicorn/prefer-string-trim-start-end": "error",
             "unicorn/prefer-structured-clone": "off", // we use `deepClone` from `@fkui/logic` and structuredClone does not play well with jest
-            "unicorn/prefer-switch": "error",
             "unicorn/prefer-ternary": "off",
-            "unicorn/prefer-top-level-await": "error",
-            "unicorn/prefer-type-error": "error",
-            "unicorn/prevent-abbreviations": "off",
-            "unicorn/relative-url-style": "error",
-            "unicorn/require-array-join-separator": "error",
+            "unicorn/prefer-uint8array-base64": "off",
+            "unicorn/relative-url-style": "warn",
+            "unicorn/require-css-escape": "off", // jsdom does not implement `CSS.escape()`
             "unicorn/require-module-attributes": "off",
             "unicorn/require-module-specifiers": "off",
-            "unicorn/require-number-to-fixed-digits-argument": "error",
+            "unicorn/single-line-block-comment-style": "off",
             "unicorn/switch-case-braces": "off",
-            "unicorn/switch-case-break-position": "error",
             "unicorn/text-encoding-identifier-case": "error",
-            "unicorn/throw-new-error": "error",
             ...filterRules(prettierConfig.rules, (rule) => {
                 return rule.startsWith("unicorn/");
             }),
@@ -365,8 +407,8 @@ export default [
             "no-debugger": "warn",
             "prettier/prettier": "warn",
 
-            "import/default": "off",
-            "import/extensions": [
+            "import-x/default": "off",
+            "import-x/extensions": [
                 "error",
                 "never",
                 {
@@ -374,26 +416,26 @@ export default [
                     json: "always",
                 },
             ],
-            "import/newline-after-import": "error",
-            "import/no-absolute-path": "error",
-            "import/no-deprecated": "error",
-            "import/no-duplicates": "error",
-            "import/no-dynamic-require": "error",
-            "import/no-extraneous-dependencies": "error",
-            "import/no-mutable-exports": "error",
-            "import/no-named-as-default": "error",
-            "import/no-named-as-default-member": "error",
-            "import/no-named-default": "error",
-            "import/no-unresolved": [
+            "import-x/newline-after-import": "error",
+            "import-x/no-absolute-path": "error",
+            "import-x/no-deprecated": "error",
+            "import-x/no-duplicates": "error",
+            "import-x/no-dynamic-require": "error",
+            "import-x/no-extraneous-dependencies": "error",
+            "import-x/no-mutable-exports": "error",
+            "import-x/no-named-as-default": "error",
+            "import-x/no-named-as-default-member": "error",
+            "import-x/no-named-default": "error",
+            "import-x/no-unresolved": [
                 "error",
                 {
                     /* neither of the resolvers will handle @ alias */
                     ignore: ["^@"],
                 },
             ],
-            "import/no-useless-path-segments": "error",
-            "import/order": [
-                "error",
+            "import-x/no-useless-path-segments": "error",
+            "import-x/order": [
+                "warn",
                 {
                     pathGroups: [
                         {
@@ -451,12 +493,15 @@ export default [
     }),
 
     defineConfig({
-        /* mjs requires file extension */
+        /* mjs and mts requires file extension */
         name: "@forsakringskassan/eslint-config/esm",
-        files: ["**/*.mjs"],
+        files: ["**/*.mjs", "**/*.mts"],
         rules: {
-            /* Could be removed once https://github.com/import-js/eslint-plugin-import/issues/3189 is fixed */
-            "import/extensions": ["error", "always", { ignorePackages: true }],
+            "import-x/extensions": [
+                "error",
+                "always",
+                { ignorePackages: true },
+            ],
         },
     }),
 
@@ -469,6 +514,7 @@ export default [
                 "error",
                 {
                     case: "pascalCase",
+                    checkDirectories: false,
                 },
             ],
         },
@@ -480,7 +526,7 @@ export default [
         name: "@forsakringskassan/eslint-config/legacy-dts",
         files: ["*.d.ts", "packages/*/*.d.ts"],
         rules: {
-            "import/no-unresolved": "off",
+            "import-x/no-unresolved": "off",
         },
     }),
 
@@ -489,9 +535,9 @@ export default [
         files: ["bin/*.{js,cjs,mjs}"],
         rules: {
             /* esm requires the usage of extension in this context */
-            "import/extensions": "off",
+            "import-x/extensions": "off",
             /* needed to run eslint before sources are compiled to dist folder */
-            "import/no-unresolved": "off",
+            "import-x/no-unresolved": "off",
         },
     }),
 
@@ -501,8 +547,8 @@ export default [
         name: "@forsakringskassan/eslint-config/cypress-pageobjects",
         files: ["cypress/**/*.[jt]s"],
         rules: {
-            "import/no-extraneous-dependencies": "off",
-            "import/order": "off",
+            "import-x/no-extraneous-dependencies": "off",
+            "import-x/order": "off",
         },
     },
 ];
@@ -511,6 +557,10 @@ const defaultAppConfig = defineConfig({
     name: "@forsakringskassan/eslint-config/app",
     rules: {
         "sonarjs/no-commented-code": "warn",
+
+        /* some (bad?) patterns in FKDS forces the use of top level side-effects */
+        "unicorn/no-top-level-side-effects": "off",
+
         "vue/no-restricted-block": "off",
     },
 });
@@ -527,17 +577,23 @@ const defaultDocsConfig = defineConfig({
 
 const defaultExampleConfig = {
     name: "@forsakringskassan/eslint-config/docs-examples",
-    files: ["**/examples/**/*.{js,ts,vue}"],
+    files: [
+        "**/examples/**/*.{js,ts,vue}",
+        "**/src/**/{docs,tests}/**/*.{js,ts,vue}",
+    ],
     rules: {
         "@eslint-community/eslint-comments/require-description": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/no-unused-vars": "off",
-        "import/no-duplicates": "off",
-        "import/no-extraneous-dependencies": "off",
+        "import-x/no-duplicates": "off",
+        "import-x/no-extraneous-dependencies": "off",
         "no-console": "off",
         "no-unused-vars": "off",
         "sonarjs/no-dead-store": "off",
         "sonarjs/pseudo-random": "off",
+
+        /* some (bad?) patterns in FKDS forces the use of top level side-effects */
+        "unicorn/no-top-level-side-effects": "off",
     },
 };
 

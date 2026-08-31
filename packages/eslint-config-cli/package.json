@@ -1,6 +1,6 @@
 {
   "name": "@forsakringskassan/eslint-config-cli",
-  "version": "14.1.0",
+  "version": "15.8.9",
   "description": "Försäkringskassans eslint shareable cli config",
   "keywords": [
     "eslint"
@@ -20,12 +20,12 @@
     "index.d.mts"
   ],
   "dependencies": {
-    "globals": "17.4.0"
+    "globals": "17.11.0"
   },
   "peerDependencies": {
-    "eslint": "^9.0.0"
+    "eslint": "^10.0.0"
   },
   "engines": {
-    "node": ">= 22.0"
+    "node": "^22.22.2 || ^24.15.0 || >= 26.0.0"
   }
 }

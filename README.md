@@ -43,6 +43,7 @@ import svelteConfig from "@forsakringskassan/eslint-config-svelte";
 import typescriptConfig from "@forsakringskassan/eslint-config-typescript";
 import typeinfoConfig from "@forsakringskassan/eslint-config-typescript-typeinfo";
 import vueConfig from "@forsakringskassan/eslint-config-vue";
+import pkg from "./package.json" with { type: "json" };
 
 export default [
     {
@@ -59,7 +60,7 @@ export default [
 
     ...defaultConfig,
 
-    cliConfig(),
+    cliConfig(pkg),
     typescriptConfig(),
     typeinfoConfig(import.meta.dirname),
     vueConfig(),
@@ -73,7 +74,7 @@ Konfigurationsfabriker tar ett optional object för att anpassa filer som ska ma
 
 ```ts
 export default [
-    cliConfig({
+    typescriptConfig({
         files: ["..."],
     }),
 ];
@@ -87,9 +88,7 @@ import { defineConfig } from "@forsakringskassan/eslint-config";
 export default [
     defineConfig({
         name: "local",
-        rules: {
-            /* ... */
-        },
+        rules: {/* ... */},
     }),
 ];
 ```
